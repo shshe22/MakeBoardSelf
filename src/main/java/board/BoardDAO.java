@@ -13,7 +13,7 @@ public class BoardDAO extends JDBCUtil {
     private static final String SHOW_NOTE = " SELECT * FROM noteList WHERE boardID = ? ";
     private static final String GET_LIST = " SELECT * FROM noteList ORDER BY boardID DESC ";
     private static final String CREATE_NOTE = " INSERT INTO noteList VALUES (?, ?, ?, ?, ?) ";
-    private static final String UPDATE_NOTE = "";
+    private static final String UPDATE_NOTE = " UPDATE noteList SET userID =?,noteTitle = ?, noteContent = ? WHERE boardID = ? ";
     private static final String DELETE_NOTE = " DELETE FROM notelist WHERE boardID = ? ";
 
     public BoardDAO(ServletContext application) {
@@ -21,6 +21,7 @@ public class BoardDAO extends JDBCUtil {
     }
 
     public String getDate() {
+
         try {
             psmt = con.prepareStatement(GET_DATE);
             rs = psmt.executeQuery();
@@ -89,6 +90,8 @@ public class BoardDAO extends JDBCUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
         return boardDTOList;
     }
@@ -106,16 +109,25 @@ public class BoardDAO extends JDBCUtil {
             psmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
     }
 
-    public void updateNote() {
+    public void updateNote(BoardDTO boardDTO) {
         try {
             psmt = con.prepareStatement(UPDATE_NOTE);
+
+            psmt.setString(1, boardDTO.getUserID());
+            psmt.setString(2, boardDTO.getNoteTitle());
+            psmt.setString(3, boardDTO.getNoteContent());
+            psmt.setInt(4, boardDTO.getBoardID());
 
             psmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
     }
 
@@ -126,6 +138,8 @@ public class BoardDAO extends JDBCUtil {
             psmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
     }
 

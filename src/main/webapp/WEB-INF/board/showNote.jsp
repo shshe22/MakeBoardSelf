@@ -12,6 +12,10 @@
     <title>게시판</title>
 </head>
 <body>
+<header>
+    <h1>게시판</h1>
+    <a href="/login">로그인</a>
+</header>
 <div>
     <table>
         <thead>
@@ -41,7 +45,7 @@
         </tbody>
     </table>
     <a href="/board">목록</a>
-    <a href="/note/update/${ requestScope.boardDTO.getBoardID() }">수정</a>
+    <a href="/note/update/?boardID=${ requestScope.boardDTO.getBoardID() }">수정</a>
     <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="/note/delete/?boardID=${ requestScope.boardDTO.getBoardID() }">삭제</a>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

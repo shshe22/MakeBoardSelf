@@ -14,7 +14,7 @@ import java.io.IOException;
 public class deleteNoteController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int boardID = Integer.parseInt(req.getParameter("boardID"));
 
         BoardDAO boardDAO = new BoardDAO(this.getServletContext());
