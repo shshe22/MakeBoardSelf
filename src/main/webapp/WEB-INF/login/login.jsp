@@ -13,6 +13,7 @@
 <body>
 <header>
     <h1>게시판</h1>
+    <a href="/join">회원가입</a>
 </header>
 <div>
     <div>

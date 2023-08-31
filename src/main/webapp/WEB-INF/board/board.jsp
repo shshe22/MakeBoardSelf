@@ -16,7 +16,7 @@
 <body>
 <header>
     <h1>게시판</h1>
-    <a href="/login">로그인</a>
+    <a href="/logout">로그아웃</a>
 </header>
 <div>
     <table>

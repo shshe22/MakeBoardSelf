@@ -6,7 +6,7 @@
 </head>
 <body>
 <script>
-    location.href = "/board";
+    location.href = "/login";
 </script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 <body>
 <header>
     <h1>게시판</h1>
-    <a href="/login">로그인</a>
+    <a href="/logout">로그아웃</a>
 </header>
 <div>
     <form method="post" action="/note/create">
@@ -27,9 +27,6 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><input type="text" placeholder="닉네임을 입력하세요." name="userID" maxlength="50"></td>
-            </tr>
             <tr>
                 <td><input type="text" placeholder="제목을 입력하세요." name="noteTitle" maxlength="50"></td>
             </tr>

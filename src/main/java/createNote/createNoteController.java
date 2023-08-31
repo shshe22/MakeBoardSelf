@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/note/create")
@@ -22,7 +23,9 @@ public class createNoteController extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
 
-        String userID = req.getParameter("userID");
+        HttpSession session = req.getSession();
+
+        String userID = (String) session.getAttribute("userID");
         String noteTitle = req.getParameter("noteTitle");
         String noteContent = req.getParameter("noteContent");
 
