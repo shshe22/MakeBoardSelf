@@ -1,7 +1,9 @@
-package deleteNote;
+package deleteComment;
 
 import board.BoardDAO;
 import board.BoardDTO;
+import comment.CommentDAO;
+import comment.CommentDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,28 +14,25 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/note/delete/*")
-public class deleteNoteController extends HttpServlet {
-
+@WebServlet("/comment/delete/*")
+public class DeleteCommentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
 
-        int boardID = Integer.parseInt(req.getParameter("boardID"));
-
-        BoardDAO boardDAO = new BoardDAO(this.getServletContext());
-        BoardDTO boardDTO = new BoardDTO();
-
-        boardDTO.setBoardID(boardID);
-
+        int commentID = Integer.parseInt(req.getParameter("commentID"));
         HttpSession session = req.getSession();
+
         String userID = (String) session.getAttribute("userID");
         session.setAttribute("userID", userID);
 
-        if(userID.equals(boardDTO.getUserID())){
-            boardDAO.deleteNote(boardDTO);
-            resp.sendRedirect("/board");
+        CommentDAO commentDAO = new CommentDAO(this.getServletContext());
+        CommentDTO commentDTO = commentDAO.getComment(commentID);
+
+        if(userID.equals(commentDTO.getUserID())){
+            commentDAO.deleteComment(commentDTO);
+            resp.sendRedirect("/note/?boardID=" + commentDTO.getBoardID());
         } else {
             PrintWriter script = resp.getWriter();
             script.println("<script>");

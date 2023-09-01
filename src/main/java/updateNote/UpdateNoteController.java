@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/note/update/*")
-public class updateNoteController extends HttpServlet {
+public class UpdateNoteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -45,6 +45,10 @@ public class updateNoteController extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
 
+        HttpSession session = req.getSession();
+        String userID = (String) session.getAttribute("userID");
+        session.setAttribute("userID", userID);
+
         int boardID = Integer.parseInt(req.getParameter("boardID"));
         String noteTitle = req.getParameter("noteTitle");
         String noteContent = req.getParameter("noteContent");
@@ -52,6 +56,7 @@ public class updateNoteController extends HttpServlet {
         BoardDAO boardDAO = new BoardDAO(this.getServletContext());
         BoardDTO boardDTO = new BoardDTO();
 
+        boardDTO.setUserID(userID);
         boardDTO.setBoardID(boardID);
         boardDTO.setNoteTitle(noteTitle);
         boardDTO.setNoteContent(noteContent);

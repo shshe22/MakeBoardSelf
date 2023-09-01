@@ -40,6 +40,10 @@
         </tbody>
     </table>
     <a href="/note/create">글쓰기</a>
+    <div>
+        <input type="text" value="검색">
+        <a href="/search">검색</a>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </body>
